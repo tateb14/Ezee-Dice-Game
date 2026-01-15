@@ -19,16 +19,28 @@ def first_roll():
     # Returns a list of 12 random integers
     pass
 
-def count_frequency(dice, number):
+def count_frequency(dice, target_number):
     # Accepts a list of 12 random integers and a target value
     # Returns how often that target value occurs in the list
-    pass
+    count = 0
+    
+    for die in dice:
+        if die == target_number:
+           count += 1
+    print(count)
 
 def find_mode(dice):
     # Accepts a list of dice.
-    # Uses count_frequency(dice, number) to determine how often each number occurs.
+    # Uses count_frequency(dice, target_number) to determine how often each number occurs.
     # Returns the mode
-    pass
+    dice_numbers = [1, 2, 3, 4, 5, 6]
+    mode = 0
+    mode_count = 0
+    for die in dice_numbers:
+        count = count_frequency(dice, die)
+        if mode_count < count:
+            mode = die
+    print(mode)
 
 def list_unmatched_dice(dice):
     # Accepts a list of dice
@@ -47,6 +59,7 @@ def reroll_many(dice):
     # Calls list_unmatched_dice() and reroll_one() to reroll each die != the mode.
     # Returns a list of rerolled dice.
     pass
+
 
 
 

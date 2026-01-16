@@ -1,3 +1,4 @@
+dice = [5, 3, 5, 6, 4, 3, 4, 2, 1, 5, 6, 5]
 def main():
     # main accepts no args
     # Calls all functions to play the number of games specified
@@ -27,7 +28,7 @@ def count_frequency(dice, target_number):
     for die in dice:
         if die == target_number:
            count += 1
-    print(count)
+    return count
 
 def find_mode(dice):
     # Accepts a list of dice.
@@ -39,29 +40,40 @@ def find_mode(dice):
     for die in dice_numbers:
         count = count_frequency(dice, die)
         if mode_count < count:
+            mode_count = count
             mode = die
-    print(mode)
+    return mode
 
-def list_unmatched_dice(dice):
-    # Accepts a list of dice
+def list_unmatched_dice(dice, mode):
+    # Accepts a list of dice and list
     # Determines which dice need rerolled
     # Returns a list of indexes to reroll
-    pass
+    reroll_list = []
+    index = 0
+    
+    for i in dice:
+        if dice[index] != mode:
+            reroll_list.append(index)
+        index += 1
+    return reroll_list
 
 def reroll_one(dice, index):
     # Accepts a list of dice and an index.
     # Uses roll_die to reroll that index
     # Returns a new list with that index rerolled
-    pass
+    new_num = roll_die()
+    dice[index] = new_num
+    return dice
 
-def reroll_many(dice):
+def reroll_many(dice, mode):
     # Accepts a list of dice
     # Calls list_unmatched_dice() and reroll_one() to reroll each die != the mode.
     # Returns a list of rerolled dice.
-    pass
-
-
-
+    reroll_list = list_unmatched_dice(dice, mode)
+    for reroll_index in reroll_list:
+        dice = reroll_one(dice, index)
+    
+    return dice
 
 
 

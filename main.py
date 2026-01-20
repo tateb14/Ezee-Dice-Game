@@ -1,4 +1,4 @@
-dice = [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6]
+import random
 def main():
     # main accepts no args
     # Calls all functions to play the number of games specified
@@ -61,9 +61,7 @@ def reroll_one(dice, index):
     # Accepts a list of dice and an index.
     # Uses roll_die to reroll that index
     # Returns a new list with that index rerolled
-    # new_num = roll_die()
-    import random
-    new_num = 1
+    new_num = roll_die()
     dice[index] = new_num
     print("New List: ", dice)
     return dice
@@ -76,7 +74,6 @@ def reroll_many(dice, mode):
     reroll_list = list_unmatched_dice(dice, mode)
     for reroll_index in reroll_list:
         dice = reroll_one(dice, reroll_index)
-    
     return dice
 
 

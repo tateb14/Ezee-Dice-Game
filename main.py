@@ -1,25 +1,45 @@
 def main():
     # main accepts no args
     # Calls all functions to play the number of games specified
-    pass
+    print("Welcome to the number dice game!")
+    print("Do you want to start")
+    roll_num = 1
+    
+    dice_list = first_roll()
+    output_dice(dice_list, roll_num)
+    mode = find_mode(dice_list)
+    dice_list = reroll_many(dice_list, mode, roll_num)
+    target_list = [mode] * 12
+    while dice_list != target_list:
+        dice_list = reroll_many(dice_list, mode, roll_num)
+        roll_num += 1
+        print()
+    
+    
 
-def output_dice(dice):
+def output_dice(dice_list, roll_num):
     # Accepts dice
     # Outputs each dice in the list to the console
-    pass
+    print(f"Roll {roll_num}:")
+    print("-----------")
+    index = 1
+    for dice in dice_list:
+        print(f"Dice {index}: {dice}")
+        index += 1
+    
 
 def roll_die():
     import random
-    dice = random.randint(0,6)
-    print(dice)
+    dice = random.randint(1,6)
+    return dice
 
 def first_roll():
+    import random
     dice_list = []
     for dice in range(12):
-        dice_list = random.randint(1, 12)
-        dice_list.append(dice_list)
+        dice_list.append(roll_die())
     return dice_list
-    import random
+    
     
 
 def count_frequency(dice, number):
@@ -28,7 +48,7 @@ def count_frequency(dice, number):
     count = 0
     
     for die in dice:
-        if die == target_number:
+        if die == number:
            count += 1
     return count
 
@@ -67,12 +87,13 @@ def reroll_one(dice, index):
     dice[index] = new_num
     return dice
 
-def reroll_many(dice, mode):
+def reroll_many(dice, mode, roll_num):
     # Accepts a list of dice
     # Calls list_unmatched_dice() and reroll_one() to reroll each die != the mode.
     # Returns a list of rerolled dice.
     reroll_list = list_unmatched_dice(dice, mode)
     for reroll_index in reroll_list:
-        dice = reroll_one(dice, index)
+        dice = reroll_one(dice, reroll_index)
+    output_dice(dice, roll_num)
     return dice
-
+main()

@@ -1,3 +1,4 @@
+import random
 def main():
     # main accepts no args
     # Calls all functions to play the number of games specified
@@ -42,19 +43,19 @@ def first_roll():
     
     
 
-def count_frequency(dice, number):
+def count_frequency(dice, target_number):
     # Accepts a list of 12 random integers and a target value
     # Returns how often that target value occurs in the list
     count = 0
     
     for die in dice:
-        if die == number:
+        if die == target_number:
            count += 1
     return count
 
 def find_mode(dice):
     # Accepts a list of dice.
-    # Uses count_frequency(dice, number) to determine how often each number occurs.
+    # Uses count_frequency(dice, target_number) to determine how often each number occurs.
     # Returns the mode
     dice_numbers = [1, 2, 3, 4, 5, 6]
     mode = 0
@@ -72,9 +73,9 @@ def list_unmatched_dice(dice, mode):
     # Returns a list of indexes to reroll
     reroll_list = []
     index = 0
-
-    for i in dice:
-        if dice[index] != mode:
+    for die in dice:
+        if die != mode:
+            print(index)
             reroll_list.append(index)
         index += 1
     return reroll_list

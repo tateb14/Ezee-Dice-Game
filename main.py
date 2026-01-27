@@ -2,23 +2,46 @@ import random
 def main():
     # main accepts no args
     # Calls all functions to play the number of games specified
-    pass
+    print("Welcome to the number dice game!")
+    print("Do you want to start")
+    roll_num = 1
+    
+    dice_list = first_roll()
+    output_dice(dice_list, roll_num)
+    mode = find_mode(dice_list)
+    dice_list = reroll_many(dice_list, mode, roll_num)
+    target_list = [mode] * 12
+    while dice_list != target_list:
+        dice_list = reroll_many(dice_list, mode, roll_num)
+        roll_num += 1
+        print()
+    
+    
 
-def output_dice(dice):
+def output_dice(dice_list, roll_num):
     # Accepts dice
     # Outputs each dice in the list to the console
-    pass
+    print(f"Roll {roll_num}:")
+    print("-----------")
+    index = 1
+    for dice in dice_list:
+        print(f"Dice {index}: {dice}")
+        index += 1
+    
 
 def roll_die():
-    # Accepts no arguments
-    # Returns a random integer from 1 to 6
-    pass
+    import random
+    dice = random.randint(1,6)
+    return dice
 
 def first_roll():
-    # Accepts no arguments
-    # Uses roll_die to generate a list of 12 integers
-    # Returns a list of 12 random integers
-    pass
+    import random
+    dice_list = []
+    for dice in range(12):
+        dice_list.append(roll_die())
+    return dice_list
+    
+    
 
 def count_frequency(dice, target_number):
     # Accepts a list of 12 random integers and a target value
@@ -63,18 +86,15 @@ def reroll_one(dice, index):
     # Returns a new list with that index rerolled
     new_num = roll_die()
     dice[index] = new_num
-    print("New List: ", dice)
     return dice
 
-def reroll_many(dice, mode):
+def reroll_many(dice, mode, roll_num):
     # Accepts a list of dice
     # Calls list_unmatched_dice() and reroll_one() to reroll each die != the mode.
     # Returns a list of rerolled dice.
-    print("OG List: ", dice)
     reroll_list = list_unmatched_dice(dice, mode)
     for reroll_index in reroll_list:
         dice = reroll_one(dice, reroll_index)
+    output_dice(dice, roll_num)
     return dice
-
-
-
+main()
